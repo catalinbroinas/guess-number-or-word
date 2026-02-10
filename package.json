@@ -1,5 +1,5 @@
 {
-  "name": "react-app",
+  "name": "guess-number-or-word",
   "private": true,
   "version": "0.0.0",
   "type": "module",
