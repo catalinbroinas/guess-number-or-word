@@ -1,0 +1,14 @@
+
+@use '../../base/variables' as *;
+
+.app-container {
+  background-image: linear-gradient(
+    120deg,
+    $bg-brand 0%,
+    $bg-accent 100%
+  );
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
