@@ -2,8 +2,8 @@ import { useState } from "react";
 
 function GameSettings({ onApply }) {
   const [localRange, setLocalRange] = useState({
-    min: null,
-    max: null
+    min: "",
+    max: ""
   });
 
   return (
@@ -11,7 +11,11 @@ function GameSettings({ onApply }) {
       className="form-container"
       onSubmit={(e) => {
         e.preventDefault();
-        onApply(localRange);
+        onApply({
+          ...localRange,
+          min: Number(localRange.min),
+          max: Number(localRange.max)
+        });
       }}
     >
       <fieldset className="form-fieldset">
@@ -26,10 +30,10 @@ function GameSettings({ onApply }) {
               type="number"
               className="form-control"
               placeholder="1"
-              value={localRange.min || ""}
+              value={localRange.min}
               onChange={(e) => setLocalRange(prev => ({
                 ...prev,
-                min: Number(e.target.value)
+                min: e.target.value
               }))}
             />
             <label htmlFor="min-range" className="form-label">
@@ -43,10 +47,10 @@ function GameSettings({ onApply }) {
               type="number"
               className="form-control"
               placeholder="10"
-              value={localRange.max || ""}
+              value={localRange.max}
               onChange={(e) => setLocalRange(prev => ({
                 ...prev,
-                max: Number(e.target.value)
+                max: e.target.value
               }))}
             />
             <label htmlFor="max-range" className="form-label">
@@ -57,9 +61,9 @@ function GameSettings({ onApply }) {
           <button
             className="btn btn-primary"
             disabled={
-              !localRange.min ||
-              !localRange.max ||
-              (localRange.min >= localRange.max)
+              localRange.min === "" ||
+              localRange.max === "" ||
+              (Number(localRange.min) >= Number(localRange.max))
             }
           >Apply</button>
         </div>
