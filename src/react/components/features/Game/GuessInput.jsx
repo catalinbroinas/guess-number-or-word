@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 function GuessInput({ onGuess }) {
-  const [localNumber, setLocalNumber] = useState(null);
+  const [localNumber, setLocalNumber] = useState("");
 
   return (
     <form className="form-container" onSubmit={(e) => {
       e.preventDefault();
-      onGuess(localNumber);
+      onGuess(Number(localNumber));
     }}>
       <div className="form-row">
         <div className="form-outline game__guess-field">
@@ -15,7 +15,8 @@ function GuessInput({ onGuess }) {
             type="number"
             className="form-control"
             placeholder="5"
-            onChange={(e) => setLocalNumber(Number(e.target.value))}
+            value={localNumber}
+            onChange={(e) => setLocalNumber(e.target.value)}
           />
           <label htmlFor="guess-input" className="form-label">
             Enter your guess
@@ -25,7 +26,7 @@ function GuessInput({ onGuess }) {
 
       <button 
         className="btn btn-primary game__guess-btn"
-        disabled={!localNumber}
+        disabled={localNumber === ""}
       >Guess</button>
     </form>
   );
