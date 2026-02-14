@@ -13,12 +13,22 @@ function Game() {
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [gameStatus, setGameStatus] = useState("idle");
 
+  const handleApplyRange = (range) => {
+    setNumberRange(range);
+    setSecretNumber(randomInt(range.min, range.max));
+    setFeedbackMessage("");
+    setGameStatus('playing');
+  };
+
   return (
     <div className="game">
       <h1 className="game__title">Guess the number</h1>
 
       {gameStatus === 'idle' && (
-        <GameSettings onApply={() => {}} />
+        <GameSettings onApply={handleApplyRange} />
+      )}
+      {gameStatus === 'playing' && (
+        <GuessInput onGuess={() => {}} />
       )}
     </div>
   );
