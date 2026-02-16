@@ -14,7 +14,7 @@ function PlayerName({ name, onNameChange }) {
             className="form-control"
             placeholder="John"
             value={name}
-            onChange={(e) => onNameChange({ name: e.target.value })}
+            onChange={(e) => onNameChange(e.target.value)}
           />
           <label htmlFor="player-name" className="form-label">
             Name

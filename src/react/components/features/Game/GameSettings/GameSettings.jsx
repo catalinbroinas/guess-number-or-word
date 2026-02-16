@@ -30,7 +30,7 @@ function GameSettings({ onApply }) {
 
      <PlayerName
         name ={settings.playerName}
-        onNameChange={(name) => setSettings(prev => ({...prev, ...name}))}
+        onNameChange={(value) => setSettings(prev => ({ ...prev, playerName: value }))}
       />
 
       <button
