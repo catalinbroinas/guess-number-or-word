@@ -16,7 +16,6 @@ function Game() {
   const FEEDBACK_MESSAGES = {
     tooLow: (number) => `Number ${number} is too small.`,
     tooHigh: (number) => `Number ${number} is too high.`,
-    success: (number) => `Correct! The number was ${number}.`,
   };
 
   // State
@@ -39,7 +38,6 @@ function Game() {
 
   const handleGuess = (guess) => {
     if (guess === secretNumber) {
-      setFeedbackMessage(FEEDBACK_MESSAGES.success(guess));
       setGameStatus(GAME_STATUS.end);
     } else {
       guess > secretNumber 
@@ -59,8 +57,6 @@ function Game() {
     <div className="game">
       <h1 className="game__title">Guess the number</h1>
 
-      <Feedback message={feedbackMessage} />
-
       {gameStatus === GAME_STATUS.idle && (
         <GameSettings onApply={handleApplyRange} />
       )}
@@ -68,7 +64,13 @@ function Game() {
       {gameStatus === GAME_STATUS.playing && (
         <>
           <GameInfo settings={settings} />
-          <GuessInput numberRange={settings} onGuess={handleGuess} />
+
+          <Feedback message={feedbackMessage} />
+
+          <GuessInput 
+            numberRange={settings} 
+            onGuess={handleGuess} 
+          />
         </>
       )}
 
