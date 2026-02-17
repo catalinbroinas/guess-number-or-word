@@ -4,6 +4,7 @@ import GuessInput from "./GuessInput";
 import { randomInt } from "../../../../js/utils/numberUtils";
 import Feedback from "./Feedback";
 import GameControls from "./GameControls";
+import GameInfo from "./GameInfo";
 
 function Game() {
   // Date
@@ -65,7 +66,10 @@ function Game() {
       )}
 
       {gameStatus === GAME_STATUS.playing && (
-        <GuessInput numberRange={settings} onGuess={handleGuess} />
+        <>
+          <GameInfo settings={settings} />
+          <GuessInput numberRange={settings} onGuess={handleGuess} />
+        </>
       )}
 
       {gameStatus === GAME_STATUS.end && (
