@@ -5,9 +5,9 @@ function GameInfo({ settings }) {
   return (
     <div className="game__info">
       <p className="text">
-        Hello, {playerName}! <br />
+        {playerName && <>Hello, {playerName}! <br /></>}
         Range: {min} - {max}. <br />
-        Attempts left: {attempts}
+        Attempts left: {attempts ?? 'Unlimited'}
       </p>
     </div>
   );
