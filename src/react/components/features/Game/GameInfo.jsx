@@ -1,12 +1,13 @@
 
 function GameInfo({ settings }) {
-  const { min, max, playerName } = settings;
+  const { min, max, playerName, attempts } = settings;
 
   return (
     <div className="game__info">
       <p className="text">
         Hello, {playerName}! <br />
-        Range: {min} - {max}.
+        Range: {min} - {max}. <br />
+        Attempts left: {attempts}
       </p>
     </div>
   );
