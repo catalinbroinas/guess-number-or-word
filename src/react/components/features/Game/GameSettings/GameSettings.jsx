@@ -1,12 +1,14 @@
 import { useState } from "react";
 import NumberRange from "./NumberRange";
 import PlayerName from "./PlayerName";
+import AttemptsInput from "./AttemptsInput";
 
 function GameSettings({ onApply }) {
   const [settings, setSettings] = useState({
     min: '',
     max: '',
-    playerName: ''
+    playerName: '',
+    attempts: ''
   });
 
   return (
@@ -18,7 +20,8 @@ function GameSettings({ onApply }) {
           ...settings,
           min: Number(settings.min),
           max: Number(settings.max),
-          playerName: settings.playerName.trim()
+          playerName: settings.playerName.trim(),
+          attempts: Number(settings.attempts)
         });
       }}
     >
@@ -37,6 +40,11 @@ function GameSettings({ onApply }) {
           <PlayerName
             name ={settings.playerName}
             onNameChange={(value) => setSettings(prev => ({ ...prev, playerName: value }))}
+          />
+
+          <AttemptsInput
+            attempts={settings.attempts}
+            onAttemptsChange={(value) => setSettings(prev => ({ ...prev, attempts: value }))}
           />
         </div>
       </fieldset>
