@@ -14,6 +14,10 @@ function Game() {
     playing: 'playing',
     end: 'end'
   };
+  const GAME_RESULT = {
+    won: 'won',
+    lost: 'lost'
+  };
   const FEEDBACK_MESSAGES = {
     tooLow: (number) => `Number ${number} is too small.`,
     tooHigh: (number) => `Number ${number} is too high.`,
@@ -23,11 +27,13 @@ function Game() {
   const [settings, setSettings] = useState({
     min: null,
     max: null,
-    playerName: ''
+    playerName: '',
+    attempts: null
   });
   const [secretNumber, setSecretNumber] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.idle);
+  const [gameResult, setGameResult] = useState(null);
 
   const handleApplyRange = (newSettings) => {
     const { min, max } = newSettings;
@@ -38,18 +44,34 @@ function Game() {
   };
 
   const handleGuess = (guess) => {
-    if (guess === secretNumber) {
-      setGameStatus(GAME_STATUS.end);
-    } else {
-      guess > secretNumber 
-        ? setFeedbackMessage(FEEDBACK_MESSAGES.tooHigh(guess))
-        : setFeedbackMessage(FEEDBACK_MESSAGES.tooLow(guess));
+    const nextAttempts = settings.attempts !== null 
+      ? settings.attempts - 1
+      : null;
+    if (nextAttempts !== null) {
+      setSettings({ ...settings, attempts: nextAttempts })
     }
+
+    if (guess === secretNumber) {
+      setGameResult(GAME_RESULT.won);
+      setGameStatus(GAME_STATUS.end);
+      return;
+    }
+
+    const hasAttemptsLeft = nextAttempts === null || nextAttempts > 0;
+    if (!hasAttemptsLeft) {
+      setGameResult(GAME_RESULT.lost);
+      setGameStatus(GAME_STATUS.end);
+      return;
+    }
+
+    guess > secretNumber 
+      ? setFeedbackMessage(FEEDBACK_MESSAGES.tooHigh(guess))
+      : setFeedbackMessage(FEEDBACK_MESSAGES.tooLow(guess));
   };
 
   const handleResetGame = () => {
     setGameStatus(GAME_STATUS.idle);
-    setSettings({...settings, min: null, max: null, playerName: ''});
+    setSettings({...settings, min: null, max: null, playerName: '', attempts: null});
     setSecretNumber(null);
     setFeedbackMessage('');
   };
@@ -77,7 +99,11 @@ function Game() {
 
       {gameStatus === GAME_STATUS.end && (
         <>
-          <GameResult playerName={settings.playerName} />
+          <GameResult
+            playerName={settings.playerName}
+            result={gameResult}
+          />
+          
           <GameControls onReset={handleResetGame} />
         </>
       )}
