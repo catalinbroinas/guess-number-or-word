@@ -2,6 +2,7 @@ import { useState } from "react";
 import NumberRange from "./NumberRange";
 import PlayerName from "./PlayerName";
 import AttemptsInput from "./AttemptsInput";
+import GameMode from "./GameMode";
 
 function GameSettings({ onApply }) {
   const [settings, setSettings] = useState({
@@ -37,6 +38,10 @@ function GameSettings({ onApply }) {
         <legend className="form-legend mb-4">
           <span className="fs-lg">Other options (optional)</span>
         </legend>
+
+        <div className="form-row mb-4">
+          <GameMode />
+        </div>
 
         <div className="form-row">
           <PlayerName
