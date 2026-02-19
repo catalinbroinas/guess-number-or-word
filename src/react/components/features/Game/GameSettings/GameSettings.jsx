@@ -53,7 +53,7 @@ function GameSettings({ onApply }) {
           {settings.mode === 'single' ? (
             <>
               <PlayerName
-                name ={settings.playerName}
+                name ={settings.player1Name}
                 onNameChange={(value) => setSettings(prev => ({ ...prev, player1Name: value }))}
               />
               
@@ -65,14 +65,14 @@ function GameSettings({ onApply }) {
           ) : (
             <>
               <PlayerName
-                name ={settings.playerName}
+                name ={settings.player1Name}
                 onNameChange={(value) => setSettings(prev => ({ ...prev, player1Name: value }))}
                 label="Player 1 name"
                 placeholder="John"
               />
 
               <PlayerName
-                name ={settings.playerName}
+                name ={settings.player2Name}
                 onNameChange={(value) => setSettings(prev => ({ ...prev, player2Name: value }))}
                 label="Player 2 name"
                 placeholder="Allan"
