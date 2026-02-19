@@ -9,7 +9,8 @@ function GameSettings({ onApply }) {
     min: '',
     max: '',
     mode: 'single',
-    playerName: '',
+    player1Name: '',
+    player2Name: '',
     attempts: ''
   });
 
@@ -22,7 +23,8 @@ function GameSettings({ onApply }) {
           ...settings,
           min: Number(settings.min),
           max: Number(settings.max),
-          playerName: settings.playerName.trim(),
+          player1Name: settings.player1Name.trim(),
+          player2Name: settings.player2Name.trim(),
           attempts: settings.attempts === ''
             ? null
             : Number(settings.attempts)
@@ -48,21 +50,34 @@ function GameSettings({ onApply }) {
         </div>
 
         <div className="form-row">
-          <PlayerName
-            name ={settings.playerName}
-            onNameChange={(value) => setSettings(prev => ({ ...prev, playerName: value }))}
-          />
-
           {settings.mode === 'single' ? (
-            <AttemptsInput
-              attempts={settings.attempts}
-              onAttemptsChange={(value) => setSettings(prev => ({ ...prev, attempts: value }))}
-            />
+            <>
+              <PlayerName
+                name ={settings.playerName}
+                onNameChange={(value) => setSettings(prev => ({ ...prev, player1Name: value }))}
+              />
+              
+              <AttemptsInput
+                attempts={settings.attempts}
+                onAttemptsChange={(value) => setSettings(prev => ({ ...prev, attempts: value }))}
+              />
+            </>
           ) : (
-            <PlayerName
-              name ={settings.playerName}
-              onNameChange={(value) => setSettings(prev => ({ ...prev, playerName: value }))}
-            />
+            <>
+              <PlayerName
+                name ={settings.playerName}
+                onNameChange={(value) => setSettings(prev => ({ ...prev, player1Name: value }))}
+                label="Player 1 name"
+                placeholder="John"
+              />
+
+              <PlayerName
+                name ={settings.playerName}
+                onNameChange={(value) => setSettings(prev => ({ ...prev, player2Name: value }))}
+                label="Player 2 name"
+                placeholder="Allan"
+              />
+            </>
           )}
         </div>
       </fieldset>

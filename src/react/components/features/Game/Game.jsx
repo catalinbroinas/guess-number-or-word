@@ -27,7 +27,9 @@ function Game() {
   const [settings, setSettings] = useState({
     min: null,
     max: null,
-    playerName: '',
+    mode: 'single',
+    player1Name: '',
+    player2Name: '',
     attempts: null
   });
   const [secretNumber, setSecretNumber] = useState(null);
@@ -71,7 +73,13 @@ function Game() {
 
   const handleResetGame = () => {
     setGameStatus(GAME_STATUS.idle);
-    setSettings({...settings, min: null, max: null, playerName: '', attempts: null});
+    setSettings({
+      ...settings,
+      min: null,
+      max: null,
+      player1Name: '',
+      player2Name: '',
+      attempts: null});
     setSecretNumber(null);
     setFeedbackMessage('');
   };
@@ -100,7 +108,7 @@ function Game() {
       {gameStatus === GAME_STATUS.end && (
         <>
           <GameResult
-            playerName={settings.playerName}
+            playerName={settings.player1Name}
             result={gameResult}
           />
           
