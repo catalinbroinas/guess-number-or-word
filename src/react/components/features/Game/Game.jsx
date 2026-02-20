@@ -111,6 +111,18 @@ function Game() {
     setFeedbackMessage('');
   };
 
+  const handlePlayAgain = () => {
+    const { min, max, player1Name } = settings;
+
+    // Initial option
+    setSettings({ ...settings, attempts: null});
+
+    setSecretNumber(randomInt(min, max));
+    setCurrentPlayer(player1Name);
+    setFeedbackMessage('');
+    setGameStatus(GAME_STATUS.idle);
+  };
+
   return (
     <div className="game">
       <h1 className="game__title">Guess the number</h1>
@@ -142,7 +154,10 @@ function Game() {
             result={gameResult}
           />
           
-          <GameControls onReset={handleResetGame} />
+          <GameControls
+            onReset={handleResetGame}
+            onPlayAgain={handlePlayAgain}
+          />
         </>
       )}
     </div>
