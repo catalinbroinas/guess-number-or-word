@@ -1,0 +1,33 @@
+// =================================
+//   BUTTONS
+// =================================
+
+// Imports
+@use 'sass:color';
+@use '../../base/variables' as *;
+@use '../template/components-mixins' as components;
+
+.btn-primary {
+  @include components.button-base(
+    color.scale($bg-brand, $lightness: -35%), 
+    $text-inverse,
+    $text-inverse,
+    $hover-bg: color.scale($bg-brand, $lightness: -40%),
+  );
+  box-shadow: 0 2px 6px rgba($color: $bg-brand, $alpha: 0.4);
+
+  &:hover,
+  &:active {
+    box-shadow: 0 4px 12px rgba($color: $bg-brand, $alpha: 0.5);
+  }
+}
+
+.btn-primary-outline {
+  @include components.button-base(
+    transparent,
+    color.scale($bg-brand, $lightness: -45%),
+    color.scale($bg-brand, $lightness: -45%),
+    color.scale($bg-brand, $lightness: 90%)
+  );
+  border: 2px solid color.scale($bg-brand, $lightness: -45%);
+}
