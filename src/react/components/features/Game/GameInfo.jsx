@@ -8,7 +8,7 @@ function GameInfo({ settings, currentPlayer }) {
         {currentPlayer ? (
           <>Player turn: {currentPlayer}<br /></>
         ) : (
-          player1Name && <>Hello, {player1Name}!<br /></>
+          player1Name && <>Player: {player1Name}<br /></>
         )}
         Range: {min} - {max}. <br />
         Attempts left: {leftAttempts ?? 'Unlimited'}
