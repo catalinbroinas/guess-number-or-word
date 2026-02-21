@@ -23,6 +23,17 @@
     letter-spacing: 1px;
   }
 
+  &__feedback {
+    background-color: $bg-surface;
+    border-left: 2px solid $bg-brand;
+    border-top-right-radius: $rounded-md;
+    border-bottom-right-radius: $rounded-md;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    
+    @include custom-text($font-text, 500, 1rem, $text-primary);
+  }
+
   &__controls {
     display: flex;
     justify-content: center;
